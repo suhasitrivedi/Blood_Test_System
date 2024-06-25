@@ -1,0 +1,28 @@
+<!-- core/view_report.html -->
+
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1>View Report</h1>
+    
+    {% if appointment %}
+    <h2>Appointment Details:</h2>
+    <p>ID: {{ appointment.id }}</p>
+    <p>Patient: {{ appointment.patient.name }}</p>
+    <p>Doctor: {{ appointment.doctor.name }}</p>
+    <p>Date: {{ appointment.date }}</p>
+    
+    {% if report %}
+    <h2>Report:</h2>
+    <p>{{ report.content }}</p>
+    <!-- Adjust report fields based on your TestReport model -->
+    {% else %}
+    <p>No report available for this appointment.</p>
+    {% endif %}
+    
+    {% else %}
+    <p>Appointment not found.</p>
+    {% endif %}
+    
+    <a href="{% url 'appointment_list' %}" class="btn btn-secondary">Back to Appointment List</a>
+{% endblock %}

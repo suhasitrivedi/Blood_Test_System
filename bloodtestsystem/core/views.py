@@ -5,26 +5,18 @@ from .forms import CustomUserCreationForm, AppointmentForm
 from .models import Appointment, TestReport
 
 def home(request):
-    """
-    Renders the home page.
-    """
+   
     return render(request, 'core/home.html')
 
 def register(request):
-    """
-    Handles user registration.
-    GET: Renders registration form.
-    POST: Processes registration form submission.
-    """
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('/')
+            return redirect('home')  # Redirect to home page after successful registration
     else:
         form = CustomUserCreationForm()
-    
     return render(request, 'core/register.html', {'form': form})
 
 @login_required
@@ -40,8 +32,8 @@ def book_appointment(request):
             appointment = form.save(commit=False)
             appointment.user = request.user
             appointment.save()
-            # Redirect to appointment list after successful booking
-            return redirect('appointment_list')
+            # Redirect to view appointment details after successful booking
+            return redirect('view_report', appointment_id=appointment.id)
     else:
         form = AppointmentForm()
     
@@ -56,14 +48,13 @@ def appointment_list(request):
     return render(request, 'core/appointment_list.html', {'appointments': appointments})
 
 @login_required
+@login_required
 def view_report(request, appointment_id):
     """
     Allows users to view test reports associated with their appointments.
     """
-    # Get the specific appointment related to the current user
     appointment = get_object_or_404(Appointment, id=appointment_id, user=request.user)
     
-    # Try to retrieve the test report associated with the appointment
     try:
         report = TestReport.objects.get(appointment=appointment)
     except TestReport.DoesNotExist:
