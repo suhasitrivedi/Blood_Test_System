@@ -4,7 +4,7 @@ from django.views.generic import RedirectView
 from core import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('register/', views.register, name='register'),  # Endpoint for user registration
     path('book_appointment/', views.book_appointment, name='book_appointment'),  # Endpoint for booking appointments
     path('appointments/', views.appointment_list, name='appointment_list'),  # Endpoint for listing appointments

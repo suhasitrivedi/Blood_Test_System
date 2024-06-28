@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your_secret_key_here')
 
-DEBUG = True
+DEBUG = True  # Set to False in production
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -49,6 +49,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'bloodtestsystem.wsgi.application'
 

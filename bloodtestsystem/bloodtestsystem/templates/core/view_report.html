@@ -1,28 +1,145 @@
-<!-- core/view_report.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Report</title>
+    <style>
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-{% extends 'core/base.html' %}
 
-{% block content %}
-    <h1>View Report</h1>
-    
-    {% if appointment %}
-    <h2>Appointment Details:</h2>
-    <p>ID: {{ appointment.id }}</p>
-    <p>Patient: {{ appointment.patient.name }}</p>
-    <p>Doctor: {{ appointment.doctor.name }}</p>
-    <p>Date: {{ appointment.date }}</p>
-    
-    {% if report %}
-    <h2>Report:</h2>
-    <p>{{ report.content }}</p>
-    <!-- Adjust report fields based on your TestReport model -->
-    {% else %}
-    <p>No report available for this appointment.</p>
-    {% endif %}
-    
-    {% else %}
-    <p>Appointment not found.</p>
-    {% endif %}
-    
-    <a href="{% url 'appointment_list' %}" class="btn btn-secondary">Back to Appointment List</a>
-{% endblock %}
+/* Body Styling */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: url('/static/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* Appointment Details Styling */
+.appointment-details, .report-details {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.appointment-details p, .report-details p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.no-report, .no-appointment {
+    font-size: 1.2em;
+    color: red;
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.btn {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .appointment-details p, .report-details p {
+        font-size: 1em;
+    }
+
+    .btn {
+        font-size: 1em;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Report</h1>
+        
+        {% if appointment %}
+        <div class="appointment-details">
+            <h2>Appointment Details:</h2>
+            <p><strong>ID:</strong> {{ appointment.id }}</p>
+            <p><strong>Patient:</strong> {{ appointment.patient.name }}</p>
+            <p><strong>Doctor:</strong> {{ appointment.doctor.name }}</p>
+            <p><strong>Date:</strong> {{ appointment.date }}</p>
+        </div>
+        
+        {% if report %}
+        <div class="report-details">
+            <h2>Report:</h2>
+            <p>{{ report.content }}</p>
+            <!-- Adjust report fields based on your TestReport model -->
+        </div>
+        {% else %}
+        <p class="no-report">No report available for this appointment.</p>
+        {% endif %}
+        
+        {% else %}
+        <p class="no-appointment">Appointment not found.</p>
+        {% endif %}
+        
+        <a href="{% url 'appointment_list' %}" class="btn btn-secondary">Back to Appointment List</a>
+    </div>
+</body>
+</html>

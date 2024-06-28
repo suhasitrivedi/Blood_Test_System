@@ -2,94 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment List</title>
+    <title>Home</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        a:hover {
-            background-color: #0056b3;
-        }
-        .no-appointments {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    background: url('bt.jpg')  ;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container Styling */
+.container {
+    background-color: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Link Styling */
+a {
+    display: inline-block;
+    margin: 10px 20px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #007BFF;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    a {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
     </style>
+
 </head>
 <body>
-    <h1>Appointment List</h1>
-    
-    {% if appointments %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Patient Name</th>
-                <th>Doctor</th>
-                <th>Date</th>
-                <!-- Add more table headers as needed -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for appointment in appointments %}
-            <tr>
-                <td>{{ appointment.id }}</td>
-                <td>{{ appointment.patient.name }}</td>
-                <td>{{ appointment.doctor.name }}</td>
-                <td>{{ appointment.date }}</td>
-                <!-- Add more table cells as needed -->
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <div class="no-appointments">
-        <p>No appointments available.</p>
-    </div>
-    {% endif %}
-    
-    <!-- Example link to create a new appointment -->
-    <div style="text-align: center;">
-        <a href="{% url 'book_appointment' %}" class="btn btn-primary">Book Appointment</a>
-    </div>
+  <p>
+    <h1>Welcome to the Blood Test System</h1>
+  </p><br>
+    <a href="{% url 'register' %}">Register</a>
+    <a href="{% url 'book_appointment' %}">Book Appointment</a>
+    <a href="{% url 'appointment_list' %}">View Appointments</a>
+
 </body>
 </html>
